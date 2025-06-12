@@ -20,7 +20,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(ruta_usuarios)
 
 
-
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
