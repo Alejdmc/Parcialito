@@ -12,3 +12,10 @@ class Mascotas(SQLModel, table=True):
     raza: str
     vuelo: str
     dueño: "Usuarios" = Field(default_factory="Usuarios")
+
+
+class Vuelos(SQLModel, table=True):
+    vuelo_id: Optional[int] = Field(default=None, primary_key=True)
+    origen: str
+    destino: str
+    viaje: list["Mascotas"] = Field(default_factory=list)
