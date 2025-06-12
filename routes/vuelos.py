@@ -53,7 +53,7 @@ async def crear_vuelo(
         return VueloResponse.model_validate(vuelo)
 
 @router.delete("/{vuelo_id}")
-async def delete_usuario(vuelo_id: int, session: AsyncSession = Depends(get_session)):
+async def delete_vuelo(vuelo_id: int, session: AsyncSession = Depends(get_session)):
     vuelo = await session.get(Vuelo, vuelo_id)
     if not vuelo or vuelo.eliminado:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
