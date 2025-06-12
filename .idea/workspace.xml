@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="quitar s sobrantes">
+    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="avance en rutas">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/usuarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usuarios.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1749716481096</updated>
-      <workItem from="1749716488061" duration="4271000" />
+      <workItem from="1749716488061" duration="2278000" />
     </task>
     <task id="LOCAL-00001" summary="inicio">
       <option name="closed" value="true" />
@@ -165,47 +166,7 @@
       <option name="project" value="LOCAL" />
       <updated>1749718487169</updated>
     </task>
-    <task id="LOCAL-00008" summary="ajuste models">
-      <option name="closed" value="true" />
-      <created>1749718775323</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1749718775323</updated>
-    </task>
-    <task id="LOCAL-00009" summary="ajuste models">
-      <option name="closed" value="true" />
-      <created>1749718911826</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1749718911826</updated>
-    </task>
-    <task id="LOCAL-00010" summary="ajuste models 2">
-      <option name="closed" value="true" />
-      <created>1749718922667</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1749718922667</updated>
-    </task>
-    <task id="LOCAL-00011" summary="ajuste models 2">
-      <option name="closed" value="true" />
-      <created>1749719048689</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1749719048689</updated>
-    </task>
-    <task id="LOCAL-00012" summary="quitar s sobrantes">
-      <option name="closed" value="true" />
-      <created>1749719198077</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1749719198077</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,9 +179,6 @@
     <MESSAGE value="inicio rutas, esperando models" />
     <MESSAGE value="creacion db" />
     <MESSAGE value="avance en rutas" />
-    <MESSAGE value="ajuste models" />
-    <MESSAGE value="ajuste models 2" />
-    <MESSAGE value="quitar s sobrantes" />
-    <option name="LAST_COMMIT_MESSAGE" value="quitar s sobrantes" />
+    <option name="LAST_COMMIT_MESSAGE" value="avance en rutas" />
   </component>
 </project>
