@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Form, File, UploadFile, Depends, HTTPException, Response
+from fastapi import APIRouter, Form, Depends, HTTPException, Response
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.future import select
 from typing import List
@@ -19,16 +19,32 @@ async def get_all_vuelos(session: AsyncSession) -> List[Vuelo]:
 @router.post("/", response_model=VueloResponse)
 async def crear_vuelo(
     origen: str = Form(...),
+    mascotas: str = Form(...),
+    vuelo_id: str = Form(...),
     destino: str = Form(...),
     fecha_salida: str = Form(...),
     fecha_llegada: str = Form(...),
     activo: str = Form("true"),
+    session: AsyncSession = Depends(get_session)
 ):
+    vuelo = Vuelo(
+        origen=origen,
+        destino=destino,
+        fecha_salida=fecha_salida,
+        fecha_llegada=fecha_llegada,
+        vuelo_id=vuelo_id,
+        mascotas=mascotas,
+        activo=activo
+    )
+    session.add(vuelo)
+    await session.commit()
+    await session.refresh(vuelo)
+    return vuelo
     @router.get("/", response_model=List[VueloResponse])
-    async def get_usuarios(session: AsyncSession = Depends(get_session)):
+    async def get_vuelo(session: AsyncSession = Depends(get_session)):
         result = await session.execute(select(Vuelo).where(Vuelo.eliminado == False))
-        usuarios = result.scalars().all()
-        return [Vuelo.model_validate(a) for a in usuarios]
+        vuelo = result.scalars().all()
+        return [Vuelo.model_validate(a) for a in vuelo]
     @router.get("/{vuelo_id}", response_model=VueloResponse)
     async def get_vuelo_por_id(vuelo_id: int, session: AsyncSession = Depends(get_session)):
         try:
@@ -37,3 +53,15 @@ async def crear_vuelo(
             return result.scalars().first()
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
+
+@router.delete("/{usuario_id}")
+async def delete_usuario(usuario_id: int, session: AsyncSession = Depends(get_session)):
+    vuelo = await session.get(Vuelo, usuario_id)
+    if not vuelo or vuelo.eliminado:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    vuelo.eliminado = True
+    await session.commit()
+    return {"ok": True}
+
+
+
