@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="inicio">
+    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="creacion db">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/usuarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usuarios.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +33,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN",
+      "assignee": "SamuelPreciado"
+    },
+    {
+      "assignee": "SamuelPreciado"
+    }
+  ],
   "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Alejdmc"
+    "assignee": "SamuelPreciado"
   }
 }]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
@@ -99,7 +107,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1749716481096</updated>
-      <workItem from="1749716488061" duration="926000" />
+      <workItem from="1749716488061" duration="1842000" />
     </task>
     <task id="LOCAL-00001" summary="inicio">
       <option name="closed" value="true" />
@@ -109,7 +117,31 @@
       <option name="project" value="LOCAL" />
       <updated>1749716948128</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="inicio de main y creo las rutas">
+      <option name="closed" value="true" />
+      <created>1749717446225</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749717446226</updated>
+    </task>
+    <task id="LOCAL-00003" summary="inicio rutas, esperando models">
+      <option name="closed" value="true" />
+      <created>1749717689218</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749717689218</updated>
+    </task>
+    <task id="LOCAL-00004" summary="creacion db">
+      <option name="closed" value="true" />
+      <created>1749717957341</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749717957341</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +150,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="0.1" />
     <MESSAGE value="inicio" />
-    <option name="LAST_COMMIT_MESSAGE" value="inicio" />
+    <MESSAGE value="inicio de main y creo las rutas" />
+    <MESSAGE value="inicio rutas, esperando models" />
+    <MESSAGE value="creacion db" />
+    <option name="LAST_COMMIT_MESSAGE" value="creacion db" />
   </component>
 </project>
