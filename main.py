@@ -9,6 +9,8 @@ from routes.vuelos import router as ruta_vuelos
 from routes.usuarios import router as ruta_usuarios
 from routes.mascotas import router as ruta_mascotas
 from utils.connection_db import init_db
+from pydantic import BaseModel
+import os
 
 app = FastAPI()
 

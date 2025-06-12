@@ -7,14 +7,10 @@ from utils.connection_db import get_session
 
 router = APIRouter(prefix="/vuelos", tags=["vuelos"])
 
-@router.get("/all_vuelos", response_model=List[VueloResponse])
-async def get_all_vuelos(session: AsyncSession) -> List[Vuelo]:
-    try:
-        stmt = select(Vuelo).where(Vuelo.activo == True)
-        result = await session.execute(stmt)
-        return result.scalars().all()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error al obtener vuelos: {str(e)}")
+@router.get("/all", response_model=List[VueloResponse])
+async def get_all_usuarios(session: AsyncSession = Depends(get_session)):
+    result = await session.execute(select(Vuelo))
+    vuelo = result.scalars().all()
     return [VueloResponse.model_validate(a) for a in vuelo]
 
 @router.post("/", response_model=VueloResponse)
@@ -54,6 +50,7 @@ async def crear_vuelo(
             return result.scalars().first()
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
+        return VueloResponse.model_validate(vuelo)
 
 @router.delete("/{vuelo_id}")
 async def delete_usuario(vuelo_id: int, session: AsyncSession = Depends(get_session)):
