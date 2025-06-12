@@ -38,4 +38,3 @@ class VueloResponse(SQLModel):
     origen: str
     destino: str
     viaje: Mascotas
-
