@@ -3,9 +3,10 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.future import select
 from typing import List
 from models import Usuario, UsuarioResponse
-from utils.connection_db import get_session
+from utils.connection_db import get_session, engine
 
-router = APIRouter(prefix="/usuarios", tags=["usuarios"])
+
+router = APIRouter()
 
 @router.get("/all", response_model=List[UsuarioResponse])
 async def get_all_usuarios(session: AsyncSession = Depends(get_session)):

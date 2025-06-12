@@ -5,7 +5,7 @@ from typing import List
 from models import Vuelo, VueloResponse
 from utils.connection_db import get_session
 
-router = APIRouter(prefix="/vuelos", tags=["vuelos"])
+router = APIRouter()
 
 @router.get("/all", response_model=List[VueloResponse])
 async def get_all_usuarios(session: AsyncSession = Depends(get_session)):
