@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, File, UploadFile, Depends, HTTPException, R
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.future import select
 from typing import List
-from models import Usuarios, UsuarioResponse
+from models import Usuario, UsuarioResponse
 from utils.connection_db import get_session
 
 router = APIRouter(prefix="/usuarios", tags=["usuarios"])
@@ -34,3 +34,4 @@ async def crear_usuario(
         if not usuario or usuario.eliminado:
             raise HTTPException(status_code=404, detail="Artista no encontrado")
         return UsuarioResponse.model_validate(usuario)
+
