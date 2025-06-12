@@ -13,12 +13,9 @@ from pydantic import BaseModel
 import os
 
 app = FastAPI()
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 app.include_router(ruta_mascotas)
 app.include_router(ruta_vuelos)
-app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(ruta_usuarios)
 
 @app.on_event("startup")

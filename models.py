@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 
@@ -17,6 +18,8 @@ class Mascota(SQLModel, table=True):
 
 class Vuelo(SQLModel, table=True):
     vuelo_id: Optional[int] = Field(default=None, primary_key=True)
+    fecha_salida: Optional[datetime] = Field(default=None, nullable=True)
+    fecha_llegada: Optional[datetime] = Field(default=None, nullable=True)
     origen: str
     destino: str
     viaje: str
@@ -37,6 +40,8 @@ class MascotaResponse(SQLModel):
 
 class VueloResponse(SQLModel):
     vuelo_id: int
+    fecha_salida: Optional[datetime]
+    fecha_llegada: Optional[datetime]
     origen: str
     destino: str
     viaje: str
