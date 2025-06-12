@@ -92,13 +92,6 @@ async def get_vuelo_fecha_llegada(vuelo_fecha_llegada: int, session: AsyncSessio
         raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
     return VueloResponse.model_validate(vuelo)
 
-
-
-
-
-
-
-
 @router.delete("/{vuelo_id}")
 async def delete_vuelo(vuelo_id: int, session: AsyncSession = Depends(get_session)):
     vuelo = await session.get(Vuelo, vuelo_id)
