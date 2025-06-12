@@ -16,7 +16,6 @@ async def get_all_vuelos(session: AsyncSession) -> List[Vuelo]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al obtener vuelos: {str(e)}")
 
-
 @router.post("/", response_model=VueloResponse)
 async def crear_vuelo(
     origen: str = Form(...),

@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, Field
 class Usuario(SQLModel, table=True):
     usuario_id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str
-    mascotas: list["Mascotas"] = Field(default_factory=list)
+    mascotas: list["Mascota"] = Field(default_factory=list)
 
 
 class Mascota(SQLModel, table=True):
@@ -12,14 +12,14 @@ class Mascota(SQLModel, table=True):
     nombre: str
     raza: str
     vuelo: str
-    dueño: "Usuarios" = Field(default_factory="Usuarios")
+    dueño: "Usuario" = Field(default_factory="Usuarios")
 
 
 class Vuelo(SQLModel, table=True):
     vuelo_id: Optional[int] = Field(default=None, primary_key=True)
     origen: str
     destino: str
-    viaje: list["Mascotas"] = Field(default_factory=list)
+    viaje: list["Mascota"] = Field(default_factory=list)
     activo: bool = Field(default=True)
 
 class UsuarioResponse(SQLModel):
