@@ -55,6 +55,7 @@ async def get_usuario_por_id(mascota_id: int, session: AsyncSession = Depends(ge
     mascota.vuelo = vuelo
     mascota.mascota_id = mascota_id
     mascota.eliminado = False
+    mascota.dueño= dueño
     session.add(mascota)
     await session.commit()
     await session.refresh(mascota)

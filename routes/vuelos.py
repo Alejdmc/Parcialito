@@ -15,6 +15,7 @@ async def get_all_vuelos(session: AsyncSession) -> List[Vuelo]:
         return result.scalars().all()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al obtener vuelos: {str(e)}")
+    return [VueloResponse.model_validate(a) for a in vuelo]
 
 @router.post("/", response_model=VueloResponse)
 async def crear_vuelo(
@@ -44,7 +45,7 @@ async def crear_vuelo(
     async def get_vuelo(session: AsyncSession = Depends(get_session)):
         result = await session.execute(select(Vuelo).where(Vuelo.eliminado == False))
         vuelo = result.scalars().all()
-        return [Vuelo.model_validate(a) for a in vuelo]
+        return [VueloResponse.model_validate(a) for a in vuelo]
     @router.get("/{vuelo_id}", response_model=VueloResponse)
     async def get_vuelo_por_id(vuelo_id: int, session: AsyncSession = Depends(get_session)):
         try:
@@ -54,9 +55,9 @@ async def crear_vuelo(
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
 
-@router.delete("/{usuario_id}")
-async def delete_usuario(usuario_id: int, session: AsyncSession = Depends(get_session)):
-    vuelo = await session.get(Vuelo, usuario_id)
+@router.delete("/{vuelo_id}")
+async def delete_usuario(vuelo_id: int, session: AsyncSession = Depends(get_session)):
+    vuelo = await session.get(Vuelo, vuelo_id)
     if not vuelo or vuelo.eliminado:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
     vuelo.eliminado = True

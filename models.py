@@ -13,7 +13,7 @@ class Mascota(SQLModel, table=True):
     nombre: str
     raza: str
     vuelo: str
-    dueño: str
+
 
 
 class Vuelo(SQLModel, table=True):
@@ -21,7 +21,7 @@ class Vuelo(SQLModel, table=True):
     origen: str
     destino: str
     viaje: str
-    mascotas: list["Mascota"] = Field(default_factory=list)
+    mascotas: str
     activo: bool = Field(default=True)
 
 class UsuarioResponse(SQLModel):
@@ -34,7 +34,7 @@ class MascotaResponse(SQLModel):
     nombre: str
     raza: str
     vuelo: str
-    dueño= str
+
 
 class VueloResponse(SQLModel):
     vuelo_id: int
