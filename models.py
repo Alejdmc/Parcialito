@@ -1,5 +1,6 @@
 from typing import Optional
 from sqlmodel import SQLModel, Field
+
 class Usuarios(SQLModel, table=True):
     usuario_id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str
@@ -19,3 +20,22 @@ class Vuelos(SQLModel, table=True):
     origen: str
     destino: str
     viaje: list["Mascotas"] = Field(default_factory=list)
+
+class UsuarioResponse(SQLModel):
+    usuario_id: int
+    nombre: str
+    mascotas: Mascotas
+
+class MascotaResponse(SQLModel):
+    mascota_id: int
+    nombre: str
+    raza: str
+    vuelo: Vuelos
+    dueño= Usuarios
+
+class VueloResponse(SQLModel):
+    vuelo_id: int
+    origen: str
+    destino: str
+    viaje: Mascotas
+
