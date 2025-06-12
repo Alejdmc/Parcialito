@@ -7,7 +7,7 @@ class Usuario(SQLModel, table=True):
     mascotas: list["Mascotas"] = Field(default_factory=list)
 
 
-class Mascotas(SQLModel, table=True):
+class Mascota(SQLModel, table=True):
     mascota_id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str
     raza: str
@@ -15,7 +15,7 @@ class Mascotas(SQLModel, table=True):
     dueño: "Usuarios" = Field(default_factory="Usuarios")
 
 
-class Vuelos(SQLModel, table=True):
+class Vuelo(SQLModel, table=True):
     vuelo_id: Optional[int] = Field(default=None, primary_key=True)
     origen: str
     destino: str
@@ -24,17 +24,17 @@ class Vuelos(SQLModel, table=True):
 class UsuarioResponse(SQLModel):
     usuario_id: int
     nombre: str
-    mascotas: Mascotas
+    mascotas: Mascota
 
 class MascotaResponse(SQLModel):
     mascota_id: int
     nombre: str
     raza: str
-    vuelo: Vuelos
+    vuelo: Vuelo
     dueño= Usuario
 
 class VueloResponse(SQLModel):
     vuelo_id: int
     origen: str
     destino: str
-    viaje: Mascotas
+    viaje: Mascota
