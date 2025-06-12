@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, File, UploadFile, Depends, HTTPException, R
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.future import select
 from typing import List
-from models import Usuario, Vuelo, Mascota, MascotaResponse
+from models import Mascota, MascotaResponse
 from utils.connection_db import get_session
 
 router = APIRouter(prefix="/mascotas", tags=["mascotas"])
