@@ -1,0 +1,154 @@
+Index: models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from typing import Optional\nfrom sqlmodel import SQLModel, Field\n\nclass Usuario(SQLModel, table=True):\n    usuario_id: Optional[int] = Field(default=None, primary_key=True)\n    nombre: str\n    mascotas: list[\"Mascota\"] = Field(default_factory=list)\n\n\nclass Mascota(SQLModel, table=True):\n    mascota_id: Optional[int] = Field(default=None, primary_key=True)\n    nombre: str\n    raza: str\n    vuelo: str\n    dueño: \"Usuario\" = Field(default_factory=\"Usuarios\")\n\n\nclass Vuelo(SQLModel, table=True):\n    vuelo_id: Optional[int] = Field(default=None, primary_key=True)\n    origen: str\n    destino: str\n    viaje: list[\"Mascota\"] = Field(default_factory=list)\n    activo: bool = Field(default=True)\n\nclass UsuarioResponse(SQLModel):\n    usuario_id: int\n    nombre: str\n    mascotas: Mascota\n\nclass MascotaResponse(SQLModel):\n    mascota_id: int\n    nombre: str\n    raza: str\n    vuelo: Vuelo\n    dueño= Usuario\n\nclass VueloResponse(SQLModel):\n    vuelo_id: int\n    origen: str\n    destino: str\n    viaje: Mascota\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/models.py b/models.py
+--- a/models.py	(revision 543e1aca8ab44d5878eae2ee731cddbd2013acae)
++++ b/models.py	(date 1749722531299)
+@@ -1,10 +1,11 @@
+-from typing import Optional
++from typing import Optional, List
+ from sqlmodel import SQLModel, Field
++from pydantic import BaseModel
+ 
+ class Usuario(SQLModel, table=True):
+     usuario_id: Optional[int] = Field(default=None, primary_key=True)
+     nombre: str
+-    mascotas: list["Mascota"] = Field(default_factory=list)
++    mascotas: str
+ 
+ 
+ class Mascota(SQLModel, table=True):
+@@ -12,30 +13,30 @@
+     nombre: str
+     raza: str
+     vuelo: str
+-    dueño: "Usuario" = Field(default_factory="Usuarios")
++    dueño: str
+ 
+ 
+ class Vuelo(SQLModel, table=True):
+     vuelo_id: Optional[int] = Field(default=None, primary_key=True)
+     origen: str
+     destino: str
+-    viaje: list["Mascota"] = Field(default_factory=list)
++    viaje: str
+     activo: bool = Field(default=True)
+ 
+ class UsuarioResponse(SQLModel):
+     usuario_id: int
+     nombre: str
+-    mascotas: Mascota
++    mascotas: str
+ 
+ class MascotaResponse(SQLModel):
+     mascota_id: int
+     nombre: str
+     raza: str
+     vuelo: Vuelo
+-    dueño= Usuario
++    dueño= str
+ 
+ class VueloResponse(SQLModel):
+     vuelo_id: int
+     origen: str
+     destino: str
+-    viaje: Mascota
++    viaje: str
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"cb368082-db83-4753-95c9-9cce8edfceb2\" name=\"Changes\" comment=\"quitar s sobrantes\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/routes/usuarios.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/routes/usuarios.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"FastAPI main\" />\n        <option value=\"FastAPI test_main\" />\n        <option value=\"HTML File\" />\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PUSH_TAGS\">\n      <GitPushTagMode>\n        <option name=\"argument\" value=\"--tags\" />\n        <option name=\"title\" value=\"All\" />\n      </GitPushTagMode>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;history&quot;: [\n    {\n      &quot;state&quot;: &quot;OPEN&quot;,\n      &quot;assignee&quot;: &quot;SamuelPreciado&quot;\n    },\n    {\n      &quot;assignee&quot;: &quot;SamuelPreciado&quot;\n    }\n  ],\n  &quot;lastFilter&quot;: {\n    &quot;assignee&quot;: &quot;SamuelPreciado&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/Alejdmc/Parcialito.git&quot;,\n    &quot;accountId&quot;: &quot;0c963828-3798-4917-bcd8-4e5dcc20c581&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 8\n}</component>\n  <component name=\"ProjectId\" id=\"2yOrV3SLNKXVtfecvD1qH0QAUhs\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"Parcialito\" type=\"Python.FastAPI\">\n      <option name=\"file\" value=\"$PROJECT_DIR$/main.py\" />\n      <module name=\"Parcialito\" />\n      <option name=\"ENV_FILES\" value=\"\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PY-242.21829.153\" />\n        <option value=\"bundled-python-sdk-464836ebc622-b74155a9e76b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.21829.153\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"cb368082-db83-4753-95c9-9cce8edfceb2\" name=\"Changes\" comment=\"\" />\n      <created>1749716481096</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1749716481096</updated>\n      <workItem from=\"1749716488061\" duration=\"4271000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"inicio\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749716948128</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749716948128</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"inicio de main y creo las rutas\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749717446225</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749717446226</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"inicio rutas, esperando models\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749717689218</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749717689218</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"creacion db\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749717957341</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749717957341</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"avance en rutas\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718337903</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718337903</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"avance en rutas\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718421637</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718421637</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"avance en rutas\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718487169</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718487169</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"ajuste models\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718775323</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718775323</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"ajuste models\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718911826</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718911826</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"ajuste models 2\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749718922667</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749718922667</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"ajuste models 2\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749719048689</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749719048689</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"quitar s sobrantes\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1749719198077</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1749719198077</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"13\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"0.1\" />\n    <MESSAGE value=\"inicio\" />\n    <MESSAGE value=\"inicio de main y creo las rutas\" />\n    <MESSAGE value=\"inicio rutas, esperando models\" />\n    <MESSAGE value=\"creacion db\" />\n    <MESSAGE value=\"avance en rutas\" />\n    <MESSAGE value=\"ajuste models\" />\n    <MESSAGE value=\"ajuste models 2\" />\n    <MESSAGE value=\"quitar s sobrantes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"quitar s sobrantes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 543e1aca8ab44d5878eae2ee731cddbd2013acae)
++++ b/.idea/workspace.xml	(date 1749722724567)
+@@ -4,9 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="quitar s sobrantes">
++    <list default="true" id="cb368082-db83-4753-95c9-9cce8edfceb2" name="Changes" comment="requirements.txt agregado">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/routes/usuarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usuarios.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -61,19 +61,20 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "DefaultHtmlFileTemplate": "HTML File",
++    "FastAPI.Parcialito.executor": "Run",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "git-widget-placeholder": "master",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="Parcialito" type="Python.FastAPI">
+       <option name="file" value="$PROJECT_DIR$/main.py" />
+@@ -205,7 +206,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1749719198077</updated>
+     </task>
+-    <option name="localTasksCounter" value="13" />
++    <task id="LOCAL-00013" summary="correcciones">
++      <option name="closed" value="true" />
++      <created>1749721130771</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1749721130771</updated>
++    </task>
++    <task id="LOCAL-00014" summary="requirements.txt agregado">
++      <option name="closed" value="true" />
++      <created>1749721443611</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1749721443611</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -221,6 +238,11 @@
+     <MESSAGE value="ajuste models" />
+     <MESSAGE value="ajuste models 2" />
+     <MESSAGE value="quitar s sobrantes" />
+-    <option name="LAST_COMMIT_MESSAGE" value="quitar s sobrantes" />
++    <MESSAGE value="correcciones" />
++    <MESSAGE value="requirements.txt agregado" />
++    <option name="LAST_COMMIT_MESSAGE" value="requirements.txt agregado" />
++  </component>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/Parcialito$Parcialito.coverage" NAME="Parcialito Coverage Results" MODIFIED="1749722531311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+   </component>
+ </project>
+\ No newline at end of file
