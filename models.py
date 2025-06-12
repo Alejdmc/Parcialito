@@ -26,14 +26,14 @@ class Vuelo(SQLModel, table=True):
 class UsuarioResponse(SQLModel):
     usuario_id: int
     nombre: str
-    mascotas: List[str]  # Lista de nombres de mascotas o IDs
+    mascotas: List[str]
 
 class MascotaResponse(SQLModel):
     mascota_id: int
     nombre: str
     raza: str
-    vuelo: Optional[str]  # Puedes poner el ID o nombre del vuelo
-    dueño: Optional[str]  # Puedes poner el nombre del dueño
+    vuelo: Optional[str]
+    dueño: Optional[str]
 
 class VueloResponse(SQLModel):
     vuelo_id: int

@@ -8,7 +8,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from routes.vuelos import router as ruta_vuelos
 from routes.usuarios import router as ruta_usuarios
 from routes.mascotas import router as ruta_mascotas
-from utils.connection_db import init_db
+from utils.connection_db import init_db, get_session, engine
 from pydantic import BaseModel
 import os
 
@@ -24,6 +24,10 @@ app.include_router(ruta_usuarios)
 @app.on_event("startup")
 async def on_startup():
     await init_db()
+
+@app.on_event("shutdown")
+async def shutdown():
+    await engine.dispose()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

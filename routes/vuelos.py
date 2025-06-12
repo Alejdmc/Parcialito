@@ -8,7 +8,7 @@ from utils.connection_db import get_session
 router = APIRouter(prefix="/vuelos", tags=["vuelos"])
 
 @router.get("/all", response_model=List[VueloResponse])
-async def get_all_usuarios(session: AsyncSession = Depends(get_session)):
+async def get_all_vuelos(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Vuelo))
     vuelo = result.scalars().all()
     return [VueloResponse.model_validate(a) for a in vuelo]
@@ -37,20 +37,20 @@ async def crear_vuelo(
     await session.commit()
     await session.refresh(vuelo)
     return vuelo
-    @router.get("/", response_model=List[VueloResponse])
-    async def get_vuelo(session: AsyncSession = Depends(get_session)):
-        result = await session.execute(select(Vuelo).where(Vuelo.eliminado == False))
-        vuelo = result.scalars().all()
-        return [VueloResponse.model_validate(a) for a in vuelo]
-    @router.get("/{vuelo_id}", response_model=VueloResponse)
-    async def get_vuelo_por_id(vuelo_id: int, session: AsyncSession = Depends(get_session)):
-        try:
-            stmt = select(Vuelo).where(Vuelo.id == vuelo_id)
-            result = await session.execute(stmt)
-            return result.scalars().first()
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
-        return VueloResponse.model_validate(vuelo)
+@router.get("/", response_model=List[VueloResponse])
+async def get_vuelo(session: AsyncSession = Depends(get_session)):
+    result = await session.execute(select(Vuelo).where(Vuelo.eliminado == False))
+    vuelo = result.scalars().all()
+    return [VueloResponse.model_validate(a) for a in vuelo]
+@router.get("/{vuelo_id}", response_model=VueloResponse)
+async def get_vuelo_por_id(vuelo_id: int, session: AsyncSession = Depends(get_session)):
+    try:
+        stmt = select(Vuelo).where(Vuelo.id == vuelo_id)
+        result = await session.execute(stmt)
+        return result.scalars().first()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al obtener vuelo: {str(e)}")
+    return VueloResponse.model_validate(vuelo)
 
 @router.delete("/{vuelo_id}")
 async def delete_vuelo(vuelo_id: int, session: AsyncSession = Depends(get_session)):
