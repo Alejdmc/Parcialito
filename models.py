@@ -20,6 +20,7 @@ class Vuelo(SQLModel, table=True):
     origen: str
     destino: str
     viaje: list["Mascota"] = Field(default_factory=list)
+    mascotas: list["Mascota"] = Field(default_factory=list)
     activo: bool = Field(default=True)
 
 class UsuarioResponse(SQLModel):
